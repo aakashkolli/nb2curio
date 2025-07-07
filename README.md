@@ -1,44 +1,43 @@
 # nb2curio
 
 ```mermaid
-graph TD;
-    subgraph User Input
-        A[notebook.ipynb]
-    end
+graph TD
+    %% User Input
+    A[notebook.ipynb]:::input
 
-    subgraph Processing Pipeline
-        NC(NotebookConverter)
-        NP(NotebookProcessor)
-        CA(CodeAnalyzer)
-        DGB(DependencyGraphBuilder)
-        CC(CurioConverter)
-        GV(GraphVisualizer)
-    end
+    %% Processing Pipeline
+    NC[NotebookConverter]:::main
+    NP[NotebookProcessor]:::process
+    CA[CodeAnalyzer]:::process
+    DGB[DependencyGraphBuilder]:::process
+    CC[CurioConverter]:::process
+    GV[GraphVisualizer]:::process
 
-    subgraph Outputs
-        O1[dataflow.json]
-        O2[Interactive Plot]
-    end
+    %% Outputs
+    O1[dataflow.json]:::output
+    O2[Interactive Graph]:::output
 
-    A -- File Path --> NC
-    NC -- Instantiates & Calls --> NP
-    NP -- Reads File --> A
-    NP -- Returns List[CodeCell] --> DGB
+    %% Flow
+    A -- "Provided to" --> NC
 
-    NC -- Instantiates & Calls --> DGB
-    DGB -- Uses --> CA
-    CA -- Analyzes Source --> DGB
-    DGB -- Returns nx.DiGraph --> NC
+    NC -- "Instantiates" --> NP
+    NP -- "Reads notebook" --> A
+    NP -- "Extracts List[CodeCell]" --> DGB
 
-    NC -- Chooses Path --> CC
-    NC -- Chooses Path --> GV
+    NC -- "Instantiates" --> DGB
+    DGB -- "Uses" --> CA
+    CA -- "Analyzes code" --> DGB
+    DGB -- "Builds nx.DiGraph" --> NC
 
-    NC -- Passes nx.DiGraph --> CC
-    CC -- Returns JSON Dict --> NC
-    NC -- Writes to --> O1
+    NC -- "Sends Graph to" --> CC
+    NC -- "Sends Graph to" --> GV
 
-    NC -- Passes nx.DiGraph --> GV
-    GV -- Renders Plot --> O2
+    CC -- "Generates JSON" --> O1
+    GV -- "Renders Interactive Graph" --> O2
 
-    style NC fill:#f9f,stroke:#333,stroke-width:2px
+    %% Styling
+    classDef input fill:#e0f7fa,stroke:#00796b,stroke-width:2px
+    classDef main fill:#e1bee7,stroke:#6a1b9a,stroke-width:2px
+    classDef process fill:#fff9c4,stroke:#fbc02d,stroke-width:2px
+    classDef output fill:#c8e6c9,stroke:#388e3c,stroke-width:2px
 ```
