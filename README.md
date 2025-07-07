@@ -1,5 +1,3 @@
-# nb2curio
-
 ```mermaid
 graph TD
     %% User Input
@@ -36,8 +34,8 @@ graph TD
     GV -- "Renders Interactive Graph" --> O2
 
     %% Styling
-    classDef input fill:#e0f7fa,stroke:#00796b,stroke-width:2px
-    classDef main fill:#e1bee7,stroke:#6a1b9a,stroke-width:2px
-    classDef process fill:#fff9c4,stroke:#fbc02d,stroke-width:2px
-    classDef output fill:#c8e6c9,stroke:#388e3c,stroke-width:2px
+    classDef input fill:#cce5ff,stroke:#004085,color:#000,stroke-width:3px
+    classDef main fill:#e2c5ff,stroke:#6a1b9a,color:#000,stroke-width:3px
+    classDef process fill:#fff3cd,stroke:#856404,color:#000,stroke-width:3px
+    classDef output fill:#d4edda,stroke:#155724,color:#000,stroke-width:3px
 ```
