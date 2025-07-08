@@ -126,22 +126,22 @@ This project uses a modular, class-based architecture to enforce a strong separa
 
 ```mermaid
 graph TD
-    A[notebook.ipynb]:::input --> NP[NotebookProcessor]
-    NP -- List of CodeCells --> DGB[DependencyGraphBuilder]
-    DGB -- uses --> CA[CodeAnalyzer]
-    DGB -- builds --> G[nx.DiGraph]
+    A[notebook.ipynb]:::input --> NP[NotebookProcessor]:::process
+    NP -- List of CodeCells --> DGB[DependencyGraphBuilder]:::process
+    DGB -- uses --> CA[CodeAnalyzer]:::process
+    DGB -- builds --> G[nx.DiGraph]:::process
 
     subgraph "Main Controller"
         direction LR
-        NC[NotebookConverter]
+        NC[NotebookConverter]:::main
     end
 
     G --> NC
 
     subgraph "Output Modules"
         direction LR
-        CC[CurioConverter]
-        GV[GraphVisualizer]
+        CC[CurioConverter]:::process
+        GV[GraphVisualizer]:::process
     end
 
     NC -- sends graph to --> CC
@@ -150,8 +150,11 @@ graph TD
     CC -- generates --> O1[dataflow.json]:::output
     GV -- renders --> O2[Interactive Graph]:::output
 
-    classDef input fill:#cce5ff,stroke:#004085
-    classDef output fill:#d4edda,stroke:#155724
+    %% Styling Definitions
+    classDef input fill:#cce5ff,stroke:#004085,color:#000,stroke-width:3px
+    classDef main fill:#e2c5ff,stroke:#6a1b9a,color:#000,stroke-width:3px
+    classDef process fill:#fff3cd,stroke:#856404,color:#000,stroke-width:3px
+    classDef output fill:#d4edda,stroke:#155724,color:#000,stroke-width:3px
 ```
 
 -----
