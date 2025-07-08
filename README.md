@@ -1,8 +1,9 @@
+This project is a work in progress (WIP) and is in active development. It is not ready for integration with Curio as frontend functionality has not yet been implemented.
+
 # Jupyter Notebook to Curio Converter (nb2curio)
 
-**nb2curio** is a command-line utility that bridges the gap between exploratory data analysis in Jupyter Notebooks and structured, reproducible workflows. The program statically analyzes the Python code within a `.ipynb` file to infer a dependency graph between its cells. It solves the problem of translating the often non-linear and iterative process of notebook development into a formal, Directed Acyclic Graph (DAG) that can be visualized and converted directly into a [Curio](https://github.com/urban-toolkit/curio) dataflow JSON format.
+**nb2curio** is a command-line utility that addresses the gap between exploratory data analysis in Jupyter Notebooks and structured, reproducible workflows. The program statically analyzes the Python code within a `.ipynb` file to infer a dependency graph between its cells. It solves the interoperability problem of translating the often non-linear and iterative process of notebook development into a formal, Directed Acyclic Graph (DAG) that can be visualized and converted directly into a [Curio](https://github.com/urban-toolkit/curio) dataflow JSON format.
 
------
 
 ## Installation
 
@@ -21,7 +22,6 @@ As nb2curio is intended to be used with Curio, nb2curio requires Python >= 3.10 
     pip install -r requirements.txt
     ```
 
------
 
 ## Usage
 
@@ -92,7 +92,6 @@ The conversion process systematically deconstructs a notebook and rebuilds it as
       * **Visualization**: The graph is rendered visually using `matplotlib`. A hierarchical layout is used for valid DAGs.
       * **Curio JSON**: The graph is traversed, and each node and edge is converted into the corresponding JSON object required by the Curio schema.
 
------
 
 ## Authoring Compatible Notebooks
 
@@ -105,7 +104,6 @@ To ensure a successful conversion, your notebook must be readable through static
   * ❌ **Don't** rely on hidden state or modify global variables from functions.
   * ❌ **Don't** use IPython magics (`%run`) or shell commands (`!pip install`) for critical workflow logic, as they are ignored.
 
------
 
 ## Architecture
 
@@ -157,31 +155,30 @@ graph TD
     classDef output fill:#d4edda,stroke:#155724,color:#000,stroke-width:3px
 ```
 
------
 
-## Roadmap 🗺️
-
-This project is under active development. Future enhancements we are planning include:
+## Roadmap
 
   * **Expanded Node Support**:
 
-      * ⚛️ **Computation Analysis**: Add support for libraries like `SciPy` and `NumPy` to create dedicated computation nodes.
-      * 🧊 **3D Visualization**: Integrate with libraries like `VTK` or `pyvista` to handle 3D visualization cells.
-      * 🖼️ **Image Nodes**: Detect image processing libraries (`Pillow`, `OpenCV`) to create specific image input/output and manipulation nodes.
-      * 🤖 **Machine Learning**: Add support for `scikit-learn` and `TensorFlow`/`PyTorch` to identify model training, evaluation, and prediction steps.
+      * ⚛️ **Computation Analysis**: Add support for libraries to create dedicated computation nodes.
+      * 🧊 **3D Visualization**: Integrate with libraries to handle 3D visualization cells.
+      * 🤖 **Node Classification**: ...
 
   * **Improved Dependency Analysis**:
-
+      
+      * 🧠 **Intelligent Node Classification**: Move beyond simple keyword matching heuristics by implementing a more advanced classification system to automatically determine a cell's purpose (e.g., feature engineering, parameter definition, model evaluation).
       * 🪄 **Limited Magic Command Support**: Add parsing for common, safe magic commands like `%store` to track variables passed between notebooks.
       * 🎯 **Enhanced Error Reporting**: Provide more specific feedback, including line numbers and suggestions for fixing unparsable cells or broken dependencies.
 
   * **User Experience and Integration**:
 
+      * <img src="nb-icon.svg" alt="Import Notebook Icon" width=18 height=18> Curio Frontend Integration: Integrate nb2curio into the Curio interface by adding direct notebook import options (e.g., an "Import Notebook" button in the file menu) and improving graph interactivity.
       * 🏷️ **Cell Tagging**: Allow users to explicitly define a cell's category using notebook metadata tags (e.g., `{"tags": ["load_data"]}`) to override automatic detection.
-      * ⚙️ **Configuration File**: Allow users to define custom keywords and rules for cell categorization in a `config.yaml` file.
-      * 🖥️ **Web-based UI**: Develop a simple web interface for uploading notebooks and viewing the graph without using the command line.
+      * ⚙️ **Configuration File**: Allow users to define custom keywords and rules for cell categorization in a separate file.
 
------
+        
+  * **Testing**:
+      * ✅ **Comprehensive Test Suite**: Develop a collection of test Jupyter Notebooks (.ipynb) and their corresponding expected Curio dataflows (.json) to validate changes and ensure accuracy.
 
 ## Troubleshooting
 
