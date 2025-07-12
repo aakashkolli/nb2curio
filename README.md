@@ -1,4 +1,4 @@
-This project is a work in progress (WIP) and is in active development. It is not ready for integration with Curio as frontend functionality has not yet been implemented.
+This project is a work in progress (WIP) and is in active development.
 
 # Jupyter Notebook to Curio Converter (nb2curio)
 
